@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { notFound, redirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import { and, eq } from "drizzle-orm";
 import { getPlayerToken } from "@/lib/auth";
 import { db } from "@/lib/db";
@@ -21,8 +21,8 @@ export default async function PlayerDetail({
   const pool = await getPoolByCode(code);
   if (!pool) notFound();
 
+  // Viewable without joining (e.g. you lost your session) — picks themselves stay gated below.
   const me = await getCurrentPlayer(pool.id, await getPlayerToken(code));
-  if (!me) redirect(`/pool/${code}`);
 
   const target = await db.query.players.findFirst({
     where: and(eq(players.id, Number(playerId)), eq(players.poolId, pool.id)),
@@ -30,7 +30,7 @@ export default async function PlayerDetail({
   if (!target) notFound();
 
   const matches = await getMatches();
-  const isMe = target.id === me.id;
+  const isMe = !!me && target.id === me.id;
   // Predict & lock picks stay private until they lock — you can always see your own.
   if (!isMe && !picksVisible(pool, matches)) {
     return (

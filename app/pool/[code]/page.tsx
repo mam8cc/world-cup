@@ -27,8 +27,8 @@ export default async function PoolHome({ params }: { params: Promise<{ code: str
       <>
         <h1>{pool.name}</h1>
         <p className="muted">
-          <span className="pill">{FORMAT_LABEL[pool.format]}</span> · {players.length} player
-          {players.length === 1 ? "" : "s"}
+          <span className="pill">{FORMAT_LABEL[pool.format]}</span>{" "}
+          · <Link href={`/pool/${code}/players`}>{players.length} player{players.length === 1 ? "" : "s"}</Link>
         </p>
         <JoinForm code={code} poolName={pool.name} />
       </>
@@ -44,8 +44,9 @@ export default async function PoolHome({ params }: { params: Promise<{ code: str
     <>
       <h1>{pool.name}</h1>
       <p className="muted">
-        <span className="pill">{FORMAT_LABEL[pool.format]}</span> · {players.length} player
-        {players.length === 1 ? "" : "s"} · status: {pool.status}
+        <span className="pill">{FORMAT_LABEL[pool.format]}</span>{" "}
+        · <Link href={`/pool/${code}/players`}>{players.length} player{players.length === 1 ? "" : "s"}</Link>{" "}
+        · status: {pool.status}
       </p>
 
       <div className="panel">
