@@ -10,7 +10,7 @@ import { getCurrentPlayer, getMatches, getPlayers, getPoolByCode, picksVisible, 
 const FORMAT_LABEL: Record<string, string> = {
   predict_lock: "Predict & Lock",
   sweepstake: "Sweepstake",
-  survivor: "Survivor Draft",
+  survivor: "Survivor",
 };
 
 export default async function PoolHome({ params }: { params: Promise<{ code: string }> }) {

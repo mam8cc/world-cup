@@ -8,6 +8,7 @@ import { scorePredictLock } from "../lib/scoring/predictLock";
 import { scoreSweepstake } from "../lib/scoring/sweepstake";
 import { scoreSurvivor } from "../lib/scoring/survivor";
 import { DEFAULT_SETTINGS } from "../lib/scoring/types";
+import { rounds, teamsPlayingInRound } from "../lib/survivor";
 
 const raw = JSON.parse(
   readFileSync(join(__dirname, "fixtures", "worldcup-2022.json"), "utf8"),
@@ -98,6 +99,25 @@ describe("sweepstake scoring", () => {
 });
 
 describe("survivor scoring", () => {
+  it("uses the opening group-stage fixtures as survivor rounds", () => {
+    expect(rounds(matches).map((r) => r.date)).toEqual([
+      "2022-11-20",
+      "2022-11-21",
+      "2022-11-22",
+      "2022-11-23",
+      "2022-11-24",
+    ]);
+    expect(teamsPlayingInRound(matches, "2022-11-21")).toEqual([
+      "England",
+      "Iran",
+      "Netherlands",
+      "Senegal",
+      "USA",
+      "Wales",
+    ]);
+    expect(teamsPlayingInRound(matches, "2022-11-25")).toEqual([]);
+  });
+
   it("keeps a winning backer alive and eliminates a losing backer", () => {
     // 2022-11-21: Senegal 0-2 Netherlands.
     const board = scoreSurvivor(

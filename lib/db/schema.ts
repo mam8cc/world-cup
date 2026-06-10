@@ -98,8 +98,7 @@ export const survivorPicks = pgTable(
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (t) => ({
-    onePerRound: unique().on(t.poolId, t.playerId, t.pickDate), // one pick per player per day
-    teamOncePerPool: unique().on(t.poolId, t.team), // each team usable once across the pool
+    onePerRound: unique().on(t.poolId, t.playerId, t.pickDate), // one pick per player per round
   }),
 );
 

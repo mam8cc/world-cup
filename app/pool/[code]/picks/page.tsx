@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import PredictForm from "@/app/components/PredictForm";
 import SurvivorBoard from "@/app/components/SurvivorBoard";
 import { getPlayerToken } from "@/lib/auth";
@@ -8,8 +8,8 @@ import { db } from "@/lib/db";
 import { assignments, predictions, survivorPicks } from "@/lib/db/schema";
 import { getCurrentPlayer, getMatches, getPlayers, getPoolByCode, predictionsOpen } from "@/lib/pool";
 import { withFlag } from "@/lib/flags";
-import { orderForRound, pickerIndex, rounds } from "@/lib/survivor";
-import { allTeams, groups, teamMatchOn, teamsPlayingOn } from "@/lib/tournament";
+import { rounds, teamsPlayingInRound } from "@/lib/survivor";
+import { allTeams, groups, teamMatchOn } from "@/lib/tournament";
 
 function today(): string {
   return new Date().toISOString().slice(0, 10);
@@ -106,23 +106,15 @@ async function renderSurvivor(
   const current = allRounds.find((r) => r.date >= t) ?? null;
 
   const allPicks = await db.query.survivorPicks.findMany({ where: eq(survivorPicks.poolId, poolId) });
-  const used = new Set(allPicks.map((p) => p.team));
 
   // Current-round state.
-  let order: { id: number; name: string }[] = [];
-  let pickerId: number | null = null;
   let available: string[] = [];
   let myPickThisRound: string | null = null;
   let pastDeadline = false;
 
   if (current) {
-    const ordered = orderForRound(players, current.index);
-    order = ordered.map((p) => ({ id: p.id, name: p.displayName }));
     const roundPicks = allPicks.filter((p) => p.pickDate === current.date);
-    const pickedIds = new Set(roundPicks.map((p) => p.playerId));
-    const turn = pickerIndex(ordered, pickedIds);
-    pickerId = turn === null ? null : ordered[turn].id;
-    available = teamsPlayingOn(matches, current.date).filter((tm) => !used.has(tm));
+    available = teamsPlayingInRound(matches, current.date);
     myPickThisRound = roundPicks.find((p) => p.playerId === meId)?.team ?? null;
     pastDeadline = current.date < t;
   }
@@ -146,9 +138,6 @@ async function renderSurvivor(
     <SurvivorBoard
       code={code}
       date={current?.date ?? null}
-      order={order}
-      pickerId={pickerId}
-      meId={meId}
       available={available}
       myPickThisRound={myPickThisRound}
       pastDeadline={pastDeadline}
