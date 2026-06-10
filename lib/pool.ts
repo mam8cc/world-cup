@@ -1,4 +1,4 @@
-import { asc, eq } from "drizzle-orm";
+import { asc, count, desc, eq } from "drizzle-orm";
 import { db } from "./db";
 import { matches as matchesTable, meta, players, pools } from "./db/schema";
 import type { Match, Stage } from "./feed";
@@ -6,6 +6,34 @@ import type { Pool, Player, MatchRow } from "./db/schema";
 
 export async function getPoolByCode(code: string): Promise<Pool | undefined> {
   return db.query.pools.findFirst({ where: eq(pools.joinCode, code) });
+}
+
+export type PoolSummary = {
+  id: number;
+  name: string;
+  format: Pool["format"];
+  joinCode: string;
+  status: Pool["status"];
+  createdAt: Date;
+  players: number;
+};
+
+// All pools with their player counts, newest first — for the site-admin overview.
+export async function listPools(): Promise<PoolSummary[]> {
+  return db
+    .select({
+      id: pools.id,
+      name: pools.name,
+      format: pools.format,
+      joinCode: pools.joinCode,
+      status: pools.status,
+      createdAt: pools.createdAt,
+      players: count(players.id),
+    })
+    .from(pools)
+    .leftJoin(players, eq(players.poolId, pools.id))
+    .groupBy(pools.id)
+    .orderBy(desc(pools.createdAt));
 }
 
 export async function getPlayers(poolId: number): Promise<Player[]> {

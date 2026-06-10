@@ -51,6 +51,7 @@ npm test
    - `DATABASE_URL` — the Postgres connection string
    - `WC_SEASON` — `2026`
    - `CRON_SECRET` — any random string (protects the cron endpoint)
+   - `ADMIN_KEY` — any random string; unlocks `/admin` (the list of all pools). Leave unset to disable that page.
 3. Run migrations and seed against the production DB:
    ```bash
    DATABASE_URL='<prod-url>' npm run db:migrate
