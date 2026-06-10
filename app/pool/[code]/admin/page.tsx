@@ -39,6 +39,13 @@ export default async function AdminPage({ params }: { params: Promise<{ code: st
         drawDone={drawDone}
         matches={matchOpts}
       />
+      <div className="panel">
+        <h2 style={{ marginTop: 0 }}>Export</h2>
+        <p className="muted small">Download every player’s picks as a spreadsheet (CSV).</p>
+        <a className="btn secondary" href={`/api/pools/${code}/export`}>
+          Export all picks (CSV)
+        </a>
+      </div>
     </>
   );
 }

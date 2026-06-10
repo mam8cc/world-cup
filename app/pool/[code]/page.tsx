@@ -61,6 +61,11 @@ export default async function PoolHome({ params }: { params: Promise<{ code: str
             <Link className="btn" href={`/pool/${code}/picks`}>
               {pool.format === "sweepstake" ? "My teams" : open ? "Make picks" : "View picks"}
             </Link>
+            {(canViewPicks || me.isAdmin) && (
+              <a className="btn secondary" href={`/api/pools/${code}/export`}>
+                Export CSV
+              </a>
+            )}
             {me.isAdmin && (
               <Link className="btn secondary" href={`/pool/${code}/admin`}>
                 Admin
