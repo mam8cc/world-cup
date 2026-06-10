@@ -1,0 +1,36 @@
+app/components/AdminLogout.tsx
+  s_39100b140e1be6::t_ef741187fd17d5 1-18
+lib/pool.ts
+  s_39100b140e1be6::t_dbfaa041cf075f 1,11-36
+lib/auth.ts
+  s_39100b140e1be6::t_ad48e5d82a6a89 1,11
+  s_39100b140e1be6::t_9f2855548e2b22 36-67
+.env.example
+  s_39100b140e1be6::t_2949f519ec7276 9-11
+app/api/admin/logout/route.ts
+  s_39100b140e1be6::t_ab1c1555cd729e 1-7
+app/api/admin/login/route.ts
+  s_39100b140e1be6::t_2d1f600b31090b 1-15
+app/admin/page.tsx
+  s_39100b140e1be6::t_25020f85e7e322 1-72
+README.md
+  s_39100b140e1be6::t_2104756e8d2b1a 54
+app/components/AdminLogin.tsx
+  s_39100b140e1be6::t_7276a743d89540 1-53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "4fb8605fb1e62f81644789f7a571f64badb1a3d5",
+  "prompts": {},
+  "sessions": {
+    "s_39100b140e1be6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8f5ed5d2-499f-450e-b549-239cecbdab4b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Mike McClannahan <mam8cc@users.noreply.github.com>"
+    }
+  }
+}
