@@ -1,0 +1,141 @@
+app/components/SurvivorBoard.tsx
+  s_39100b140e1be6::t_863e6c17f1bf3a 1-128
+app/components/Leaderboard.tsx
+  s_39100b140e1be6::t_4830c9174e1608 1-48
+app/api/pools/route.ts
+  s_39100b140e1be6::t_2b6db63c770769 1-32
+package.json
+  s_39100b140e1be6::t_81e0b572ae8c3d 13-14
+  s_39100b140e1be6::t_fb5b7416874e12 1-12,15-32
+docker-compose.yml
+  s_39100b140e1be6::t_be72948b850602 1-15
+lib/standings.ts
+  s_39100b140e1be6::t_218a4909a10aa3 1-63
+tests/fixtures/worldcup-2022.json
+  s_39100b140e1be6::t_c7e1cf807b12e5 1-750
+app/pool/[code]/picks/page.tsx
+  s_39100b140e1be6::t_616ea6cfb2a73f 1-157
+app/api/pools/[code]/lock/route.ts
+  s_39100b140e1be6::t_687613b6351f04 1-17
+.env.example
+  s_39100b140e1be6::t_e955efc86192a4 1-8
+app/api/pools/[code]/survivor-pick/route.ts
+  s_39100b140e1be6::t_3b4563c704da75 1-78
+app/components/CreatePool.tsx
+  s_39100b140e1be6::t_ab02a1228c8f4e 1-84
+lib/scoring/predictLock.ts
+  s_39100b140e1be6::t_188361b5ada816 1-52
+.gitignore
+  s_39100b140e1be6::t_89c121a28c756b 1-12
+  s_39100b140e1be6::t_ae2fbe7c52ebde 18-19
+  s_39100b140e1be6::t_46fe67cea0d7ac 13-17
+drizzle.config.ts
+  s_39100b140e1be6::t_c10497dd6e856f 1-10
+next.config.mjs
+  s_39100b140e1be6::t_51a9f35a864ae6 1-4
+vitest.config.ts
+  s_39100b140e1be6::t_4b94fb1819906e 1-8
+app/page.tsx
+  s_39100b140e1be6::t_f2d8539e720095 1-16
+lib/scoring/types.ts
+  s_39100b140e1be6::t_1d2e8f45c3a4c8 1-53
+lib/db/schema.ts
+  s_39100b140e1be6::t_f011ea6b2f5a86 1-108
+app/pool/[code]/admin/page.tsx
+  s_39100b140e1be6::t_fc813b8cc2bd09 1-43
+lib/scoring/survivor.ts
+  s_39100b140e1be6::t_168b290916e525 1-45
+lib/tournament.ts
+  s_39100b140e1be6::t_9c4494ab790db1 1-31,46-84
+  s_39100b140e1be6::t_a33c2e13b8b03c 32-45
+lib/pool.ts
+  s_39100b140e1be6::t_267e273f6e59b2 1-60
+lib/auth.ts
+  s_39100b140e1be6::t_67679377f78fad 1-5,9-10,12-15,21-24,30,32
+  s_39100b140e1be6::t_1df0d1b2378ed0 6-8,11,16-20,25-29,31
+lib/db/index.ts
+  s_39100b140e1be6::t_d761f7e6133d4c 1-14
+app/components/ShareLink.tsx
+  s_39100b140e1be6::t_5dd77303dd35ec 1-27
+scripts/seed.ts
+  s_39100b140e1be6::t_9a22932c03c00b 3-12
+  s_39100b140e1be6::t_e17c5c20355e35 1-2
+package-lock.json
+  s_39100b140e1be6::t_ae2fbe7c52ebde 1-3932
+app/pool/[code]/page.tsx
+  s_39100b140e1be6::t_6212a28f13f5f6 1-76
+app/components/PredictForm.tsx
+  s_39100b140e1be6::t_fa2ff61e3902fd 1-129
+scripts/migrate.ts
+  s_39100b140e1be6::t_d525bc3d07f5de 1-4,8,15
+  s_39100b140e1be6::t_396de1b66365c2 5-7,9-14,16-19
+app/api/pools/[code]/predictions/route.ts
+  s_39100b140e1be6::t_f02d1077508f90 1-51
+app/api/pools/[code]/draw/route.ts
+  s_39100b140e1be6::t_10230923799a2e 1-59
+drizzle/meta/_journal.json
+  s_39100b140e1be6::t_ae2fbe7c52ebde 1-13
+README.md
+  s_39100b140e1be6::t_13b534aaf3ec1b 1-63
+lib/feed.ts
+  s_39100b140e1be6::t_e7451b989f9809 84-86
+  s_39100b140e1be6::t_21efbb16ad84b3 72
+  s_39100b140e1be6::t_e17aa843806c59 1-26,28-71,73-83,87-123
+  s_39100b140e1be6::t_6810dd12d0bf89 27
+tsconfig.json
+  s_39100b140e1be6::t_4ba31df85a2084 1-23
+app/api/pools/[code]/refresh/route.ts
+  s_39100b140e1be6::t_9fedbdfd7124cb 1-16
+vercel.json
+  s_39100b140e1be6::t_7945a24bb18660 1-8
+lib/refresh.ts
+  s_39100b140e1be6::t_f12165e8af208e 4
+  s_39100b140e1be6::t_9ac6de2e979225 16
+  s_39100b140e1be6::t_6ce5492da4bf25 1-3,5-15,17-83
+lib/tokens.ts
+  s_39100b140e1be6::t_4c8ea7f8207345 1-16
+app/globals.css
+  s_39100b140e1be6::t_0831b41b2a8165 1-111
+lib/survivor.ts
+  s_39100b140e1be6::t_8eb429a4c8710c 1-30
+tests/scoring.test.ts
+  s_39100b140e1be6::t_1e5d8a99c7b508 1-128
+app/components/JoinForm.tsx
+  s_39100b140e1be6::t_db0ef12dded87d 1-42
+app/components/JoinExisting.tsx
+  s_39100b140e1be6::t_628f8cc1752f7e 1-31
+lib/leaderboard.ts
+  s_39100b140e1be6::t_4bb6a0eac2fd0d 1-67
+app/api/pools/[code]/override/route.ts
+  s_39100b140e1be6::t_9e7908cd27ca7d 1-35
+app/components/AdminPanel.tsx
+  s_39100b140e1be6::t_1e639cd5058b1d 1-143
+drizzle/0000_petite_malcolm_colcord.sql
+  s_39100b140e1be6::t_c2e74751cdc675 1-113
+app/layout.tsx
+  s_39100b140e1be6::t_45acc8f67fb89b 1-25
+app/api/pools/[code]/join/route.ts
+  s_39100b140e1be6::t_ade8ea64f614c8 1-42
+drizzle/meta/0000_snapshot.json
+  s_39100b140e1be6::t_ae2fbe7c52ebde 1-552
+lib/scoring/sweepstake.ts
+  s_39100b140e1be6::t_a4e5e68c760ec6 1-52
+app/api/cron/score/route.ts
+  s_39100b140e1be6::t_3a8623c36dd07c 1-23
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "663b8c383e96de4fd27fdb2338e98f1baa246033",
+  "prompts": {},
+  "sessions": {
+    "s_39100b140e1be6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8f5ed5d2-499f-450e-b549-239cecbdab4b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Mike McClannahan <mam8cc@users.noreply.github.com>"
+    }
+  }
+}
