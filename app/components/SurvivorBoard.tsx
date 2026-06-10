@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { withFlag } from "@/lib/flags";
 
 type OrderEntry = { id: number; name: string };
 type HistoryRound = { date: string; picks: { name: string; team: string; outcome: string }[] };
@@ -76,14 +77,14 @@ export default function SurvivorBoard({
                 <div className="teamlist">
                   {available.map((t) => (
                     <button key={t} className="secondary" disabled={busy} onClick={() => pick(t)}>
-                      {t}
+                      {withFlag(t)}
                     </button>
                   ))}
                 </div>
               )}
             </>
           ) : myPickThisRound ? (
-            <p className="notice">You backed <strong>{myPickThisRound}</strong> this round.</p>
+            <p className="notice">You backed <strong>{withFlag(myPickThisRound)}</strong> this round.</p>
           ) : pickerName ? (
             <p className="muted">
               Waiting for <strong>{pickerName}</strong> to pick…
@@ -114,7 +115,7 @@ export default function SurvivorBoard({
               <div className="teamlist">
                 {h.picks.map((p, i) => (
                   <span key={i} className={`teamchip ${p.outcome === "out" ? "used" : ""}`}>
-                    {p.name}: {p.team}{" "}
+                    {p.name}: {withFlag(p.team)}{" "}
                     {p.outcome === "survived" ? "✅" : p.outcome === "out" ? "❌" : "⏳"}
                   </span>
                 ))}

@@ -5,6 +5,7 @@ import AdminPanel from "@/app/components/AdminPanel";
 import { getAdminToken } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { assignments } from "@/lib/db/schema";
+import { withFlag } from "@/lib/flags";
 import { getMatches, getPoolByCode } from "@/lib/pool";
 
 export default async function AdminPage({ params }: { params: Promise<{ code: string }> }) {
@@ -20,7 +21,7 @@ export default async function AdminPage({ params }: { params: Promise<{ code: st
   const matches = await getMatches();
   const matchOpts = matches.map((m) => ({
     feedKey: m.feedKey,
-    label: `${m.date} ${m.round}: ${m.team1} v ${m.team2}`,
+    label: `${m.date} ${m.round}: ${withFlag(m.team1)} v ${withFlag(m.team2)}`,
     ft1: m.ft?.[0] ?? null,
     ft2: m.ft?.[1] ?? null,
   }));

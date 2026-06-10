@@ -7,6 +7,7 @@ import { getPlayerToken } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { assignments, predictions, survivorPicks } from "@/lib/db/schema";
 import { getCurrentPlayer, getMatches, getPlayers, getPoolByCode, predictionsOpen } from "@/lib/pool";
+import { withFlag } from "@/lib/flags";
 import { orderForRound, pickerIndex, rounds } from "@/lib/survivor";
 import { allTeams, groups, teamMatchOn, teamsPlayingOn } from "@/lib/tournament";
 
@@ -84,7 +85,7 @@ async function renderSweepstake(
           <strong>{nameOf.get(pid)}{pid === meId ? " (you)" : ""}</strong>
           <div className="teamlist" style={{ marginTop: 6 }}>
             {teams.map((t) => (
-              <span key={t} className="teamchip">{t}</span>
+              <span key={t} className="teamchip">{withFlag(t)}</span>
             ))}
           </div>
         </div>

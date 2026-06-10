@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { withFlag } from "@/lib/flags";
 
 type Existing = { kind: string; slot: string; team: string };
 
@@ -82,19 +83,23 @@ export default function PredictForm({
           <div className="g">Grp {g}</div>
           <select value={first[g]} onChange={(e) => setFirst({ ...first, [g]: e.target.value })}>
             <option value="">1st place…</option>
-            {teams.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
+            {teams
+              .filter((t) => t !== second[g])
+              .map((t) => (
+                <option key={t} value={t}>
+                  {withFlag(t)}
+                </option>
+              ))}
           </select>
           <select value={second[g]} onChange={(e) => setSecond({ ...second, [g]: e.target.value })}>
             <option value="">2nd place…</option>
-            {teams.map((t) => (
-              <option key={t} value={t}>
-                {t}
-              </option>
-            ))}
+            {teams
+              .filter((t) => t !== first[g])
+              .map((t) => (
+                <option key={t} value={t}>
+                  {withFlag(t)}
+                </option>
+              ))}
           </select>
         </div>
       ))}
@@ -105,7 +110,7 @@ export default function PredictForm({
         <option value="">Pick the winner…</option>
         {allTeams.map((t) => (
           <option key={t} value={t}>
-            {t}
+            {withFlag(t)}
           </option>
         ))}
       </select>

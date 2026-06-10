@@ -17,3 +17,4 @@ dev.log
 *.png
 
 tsconfig.tsbuildinfo
+.env*.local
