@@ -1,0 +1,34 @@
+lib/pool.ts
+  s_39100b140e1be6::t_3a5331332ace97 3
+  s_39100b140e1be6::t_e7ba8a1a437046 61-74
+app/pool/[code]/page.tsx
+  s_39100b140e1be6::t_847ebd849f8dbd 8
+  s_39100b140e1be6::t_bed07e3933cf84 41
+  s_39100b140e1be6::t_332437422e5196 72,74-78
+lib/scoring/sweepstake.ts
+  s_39100b140e1be6::t_cee5eff02d63c2 7-9,34-44
+app/components/Leaderboard.tsx
+  s_39100b140e1be6::t_198ffe084aef79 1,9-10,15-17
+  s_39100b140e1be6::t_3457a50d67cee2 38-42
+app/pool/[code]/player/[playerId]/page.tsx
+  s_39100b140e1be6::t_67efdb14543fb9 1-206
+lib/leaderboard.ts
+  s_39100b140e1be6::t_27f192f2a6d575 3,6
+  s_39100b140e1be6::t_2a523a889773fd 32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "baed6381be8e75d1aa58aeb1273b85bc01919f23",
+  "prompts": {},
+  "sessions": {
+    "s_39100b140e1be6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8f5ed5d2-499f-450e-b549-239cecbdab4b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Mike McClannahan <mam8cc@users.noreply.github.com>"
+    }
+  }
+}
