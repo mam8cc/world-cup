@@ -1,0 +1,21 @@
+tests/fixtures/tournament.ts
+  s_39100b140e1be6::t_5371f554f98249 1-139
+tests/tournament.test.ts
+  s_39100b140e1be6::t_f410dd0e230364 1-160
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "f54038e5cb297ba2aba810af98b3bc9d87a8c6f9",
+  "prompts": {},
+  "sessions": {
+    "s_39100b140e1be6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8f5ed5d2-499f-450e-b549-239cecbdab4b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Mike McClannahan <mam8cc@users.noreply.github.com>"
+    }
+  }
+}
