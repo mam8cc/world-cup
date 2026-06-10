@@ -1,0 +1,24 @@
+app/pool/[code]/admin/page.tsx
+  s_39100b140e1be6::t_aa32ee6a53868c 42-48
+app/api/pools/[code]/export/route.ts
+  s_39100b140e1be6::t_8c7f0963de0d12 2
+  s_39100b140e1be6::t_6e99e72eee39d4 1,3-106
+app/pool/[code]/page.tsx
+  s_39100b140e1be6::t_1185287b1d439b 64-68
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "5e6a94e7d626978fa88c01e0b212d5b2636a2550",
+  "prompts": {},
+  "sessions": {
+    "s_39100b140e1be6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8f5ed5d2-499f-450e-b549-239cecbdab4b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Mike McClannahan <mam8cc@users.noreply.github.com>"
+    }
+  }
+}
