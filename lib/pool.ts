@@ -1,6 +1,6 @@
 import { asc, eq } from "drizzle-orm";
 import { db } from "./db";
-import { matches as matchesTable, players, pools } from "./db/schema";
+import { matches as matchesTable, meta, players, pools } from "./db/schema";
 import type { Match, Stage } from "./feed";
 import type { Pool, Player, MatchRow } from "./db/schema";
 
@@ -57,4 +57,18 @@ export function predictionsOpen(pool: Pool, matches: Match[]): boolean {
   // Compare by date (kickoff times vary); picks lock at the start of opening day.
   const today = new Date().toISOString().slice(0, 10);
   return today < first;
+}
+
+// Whether one player may view another's picks. Predict & lock stays hidden until picks
+// lock (so nobody copies); sweepstake teams are public once drawn; survivor picks are
+// public as the draft happens.
+export function picksVisible(pool: Pool, matches: Match[]): boolean {
+  if (pool.format === "predict_lock") return !predictionsOpen(pool, matches);
+  if (pool.format === "sweepstake") return pool.status === "locked";
+  return true; // survivor
+}
+
+export async function getGoldenBootWinners(): Promise<string[]> {
+  const row = await db.query.meta.findFirst({ where: eq(meta.key, "golden_boot") });
+  return (row?.value as string[] | undefined) ?? [];
 }

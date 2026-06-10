@@ -4,19 +4,13 @@ import { rankRows, type LeaderboardRow, type Settings } from "./types";
 
 export type PlayerAssignments = { playerId: number; displayName: string; teams: string[] };
 
-// Each player owns a set of teams (assigned by a random snake draw). A player's score
-// is the sum of their teams' results: per-match win/draw points + knockout stage-reached
-// bonuses + a champion bonus.
-export function scoreSweepstake(
-  players: PlayerAssignments[],
-  matches: Match[],
-  settings: Settings,
-): LeaderboardRow[] {
+// Points each team has earned: per-match win/draw + knockout stage-reached bonuses +
+// champion bonus. Exposed so a player detail view can show a per-team breakdown.
+export function teamScores(matches: Match[], settings: Settings): Map<string, number> {
   const cfg = settings.sweepstake;
   const champ = champion(matches);
   const reached = stagesReached(matches);
 
-  // Per-team running score from match results.
   const teamScore = new Map<string, number>();
   const bump = (team: string, pts: number) => teamScore.set(team, (teamScore.get(team) ?? 0) + pts);
 
@@ -37,6 +31,17 @@ export function scoreSweepstake(
     }
   }
   if (champ) bump(champ, cfg.champion);
+  return teamScore;
+}
+
+// Each player owns a set of teams (assigned by a random snake draw). A player's score
+// is the sum of their teams' results.
+export function scoreSweepstake(
+  players: PlayerAssignments[],
+  matches: Match[],
+  settings: Settings,
+): LeaderboardRow[] {
+  const teamScore = teamScores(matches, settings);
 
   const rows = players.map((p) => {
     const score = p.teams.reduce((sum, t) => sum + (teamScore.get(t) ?? 0), 0);

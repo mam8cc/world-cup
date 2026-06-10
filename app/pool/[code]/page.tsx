@@ -5,7 +5,7 @@ import Leaderboard from "@/app/components/Leaderboard";
 import ShareLink from "@/app/components/ShareLink";
 import { getPlayerToken } from "@/lib/auth";
 import { computeLeaderboard } from "@/lib/leaderboard";
-import { getCurrentPlayer, getMatches, getPlayers, getPoolByCode, predictionsOpen } from "@/lib/pool";
+import { getCurrentPlayer, getMatches, getPlayers, getPoolByCode, picksVisible, predictionsOpen } from "@/lib/pool";
 
 const FORMAT_LABEL: Record<string, string> = {
   predict_lock: "Predict & Lock",
@@ -38,6 +38,7 @@ export default async function PoolHome({ params }: { params: Promise<{ code: str
   const matches = await getMatches();
   const rows = await computeLeaderboard(pool, players, matches);
   const open = predictionsOpen(pool, matches);
+  const canViewPicks = picksVisible(pool, matches);
 
   return (
     <>
@@ -68,8 +69,13 @@ export default async function PoolHome({ params }: { params: Promise<{ code: str
           </div>
         </div>
         <div style={{ marginTop: 12 }}>
-          <Leaderboard rows={rows} meId={me.id} format={pool.format} />
+          <Leaderboard rows={rows} meId={me.id} format={pool.format} code={code} linkable={canViewPicks} />
         </div>
+        {canViewPicks && (
+          <p className="muted small" style={{ marginTop: 10 }}>
+            Tap a player’s name to see their {pool.format === "sweepstake" ? "teams" : "picks"} and results.
+          </p>
+        )}
       </div>
     </>
   );

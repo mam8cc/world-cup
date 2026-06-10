@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { LeaderboardRow } from "@/lib/scoring/types";
 import type { PoolFormat } from "@/lib/scoring/types";
 
@@ -5,10 +6,15 @@ export default function Leaderboard({
   rows,
   meId,
   format,
+  code,
+  linkable,
 }: {
   rows: LeaderboardRow[];
   meId: number | null;
   format: PoolFormat;
+  code: string;
+  // When true, player names link to their pick/results detail page.
+  linkable: boolean;
 }) {
   if (rows.length === 0) {
     return <p className="muted small">No players yet. Share the link to get people in.</p>;
@@ -29,7 +35,11 @@ export default function Leaderboard({
           <tr key={r.playerId} className={r.playerId === meId ? "me" : ""}>
             <td className="rank">{r.rank}</td>
             <td>
-              {r.displayName}
+              {linkable ? (
+                <Link href={`/pool/${code}/player/${r.playerId}`}>{r.displayName}</Link>
+              ) : (
+                r.displayName
+              )}
               {r.playerId === meId && <span className="muted small"> (you)</span>}
             </td>
             <td className="muted small">{format === "survivor" ? "" : r.detail}</td>

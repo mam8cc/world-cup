@@ -1,17 +1,13 @@
 import { eq, inArray } from "drizzle-orm";
 import { db } from "./db";
-import { assignments, meta, predictions, survivorPicks } from "./db/schema";
+import { assignments, predictions, survivorPicks } from "./db/schema";
 import type { Match } from "./feed";
 import type { Pool, Player } from "./db/schema";
+import { getGoldenBootWinners } from "./pool";
 import { scorePredictLock, type PlayerPredictions, type Prediction } from "./scoring/predictLock";
 import { scoreSweepstake } from "./scoring/sweepstake";
 import { scoreSurvivor } from "./scoring/survivor";
 import type { LeaderboardRow } from "./scoring/types";
-
-async function goldenBootWinners(): Promise<string[]> {
-  const row = await db.query.meta.findFirst({ where: eq(meta.key, "golden_boot") });
-  return (row?.value as string[] | undefined) ?? [];
-}
 
 export async function computeLeaderboard(
   pool: Pool,
@@ -33,7 +29,7 @@ export async function computeLeaderboard(
       displayName: p.displayName,
       predictions: byPlayer.get(p.id) ?? [],
     }));
-    return scorePredictLock(input, matches, pool.settings, await goldenBootWinners());
+    return scorePredictLock(input, matches, pool.settings, await getGoldenBootWinners());
   }
 
   if (pool.format === "sweepstake") {
