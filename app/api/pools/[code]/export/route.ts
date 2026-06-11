@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { eq, inArray } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { assignments, predictions, survivorPicks } from "@/lib/db/schema";
-import { getAdminToken, getPlayerToken } from "@/lib/auth";
+import { getPlayerToken, isPoolAdmin } from "@/lib/auth";
 import { getCurrentPlayer, getMatches, getPlayers, getPoolByCode, picksVisible } from "@/lib/pool";
 import { groups } from "@/lib/tournament";
 import type { Match } from "@/lib/feed";
@@ -23,7 +23,7 @@ export async function GET(req: Request, { params }: { params: Promise<{ code: st
   const pool = await getPoolByCode(code);
   if (!pool) return NextResponse.json({ error: "Pool not found." }, { status: 404 });
 
-  const isAdmin = (await getAdminToken(code)) === pool.adminToken;
+  const isAdmin = await isPoolAdmin(code, pool.adminToken);
   const me = await getCurrentPlayer(pool.id, await getPlayerToken(code));
   if (!me && !isAdmin) return NextResponse.json({ error: "Join the pool first." }, { status: 401 });
 

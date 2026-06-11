@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { assignments, pools } from "@/lib/db/schema";
-import { getAdminToken } from "@/lib/auth";
+import { isPoolAdmin } from "@/lib/auth";
 import { getMatches, getPlayers, getPoolByCode } from "@/lib/pool";
 import { allTeams } from "@/lib/tournament";
 
@@ -21,8 +21,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ code: s
   if (!pool || pool.format !== "sweepstake") {
     return NextResponse.json({ error: "Pool not found." }, { status: 404 });
   }
-  const adminToken = await getAdminToken(code);
-  if (adminToken !== pool.adminToken) {
+  if (!(await isPoolAdmin(code, pool.adminToken))) {
     return NextResponse.json({ error: "Admins only." }, { status: 403 });
   }
 

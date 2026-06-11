@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { matches } from "@/lib/db/schema";
-import { getAdminToken } from "@/lib/auth";
+import { isPoolAdmin } from "@/lib/auth";
 import { getPoolByCode } from "@/lib/pool";
 
 // Manual result entry — a fallback if the upstream feed lags behind real life.
@@ -10,7 +10,7 @@ export async function POST(req: Request, { params }: { params: Promise<{ code: s
   const { code } = await params;
   const pool = await getPoolByCode(code);
   if (!pool) return NextResponse.json({ error: "Pool not found." }, { status: 404 });
-  if ((await getAdminToken(code)) !== pool.adminToken) {
+  if (!(await isPoolAdmin(code, pool.adminToken))) {
     return NextResponse.json({ error: "Admins only." }, { status: 403 });
   }
 

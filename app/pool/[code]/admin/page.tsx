@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { eq } from "drizzle-orm";
 import AdminPanel from "@/app/components/AdminPanel";
-import { getAdminToken } from "@/lib/auth";
+import { isPoolAdmin } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { assignments } from "@/lib/db/schema";
 import { withFlag } from "@/lib/flags";
@@ -12,7 +12,7 @@ export default async function AdminPage({ params }: { params: Promise<{ code: st
   const { code } = await params;
   const pool = await getPoolByCode(code);
   if (!pool) notFound();
-  if ((await getAdminToken(code)) !== pool.adminToken) redirect(`/pool/${code}`);
+  if (!(await isPoolAdmin(code, pool.adminToken))) redirect(`/pool/${code}`);
 
   const drawDone =
     pool.format === "sweepstake" &&

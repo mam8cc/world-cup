@@ -65,3 +65,10 @@ export async function clearSiteAdmin(): Promise<void> {
   const store = await cookies();
   store.delete(SITE_ADMIN_COOKIE);
 }
+
+// Authorized to administer a specific pool: either holding that pool's admin cookie, or
+// being a global site admin.
+export async function isPoolAdmin(code: string, poolAdminToken: string): Promise<boolean> {
+  if ((await getAdminToken(code)) === poolAdminToken) return true;
+  return isSiteAdmin();
+}

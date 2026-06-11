@@ -48,6 +48,7 @@ export default async function SiteAdmin() {
                 <th>Status</th>
                 <th className="score">Players</th>
                 <th>Created</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -61,6 +62,11 @@ export default async function SiteAdmin() {
                   <td className="small">{p.status}</td>
                   <td className="score">{p.players}</td>
                   <td className="muted small">{new Date(p.createdAt).toISOString().slice(0, 10)}</td>
+                  <td style={{ textAlign: "right" }}>
+                    <Link className="btn secondary" href={`/pool/${p.joinCode}/admin`}>
+                      Manage
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>
