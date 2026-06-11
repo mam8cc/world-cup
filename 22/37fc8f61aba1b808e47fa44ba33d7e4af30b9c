@@ -1,0 +1,48 @@
+app/api/pools/[code]/remove-player/route.ts
+  s_39100b140e1be6::t_ca42fc06450f1f 1-30
+lib/feed.ts
+  s_39100b140e1be6::t_6e77f6b9350b99 41-42,45-55
+  s_39100b140e1be6::t_c680b652895312 112
+app/pool/[code]/admin/page.tsx
+  s_39100b140e1be6::t_b493cb940da807 46
+  s_39100b140e1be6::t_52ce8d04944b01 9
+  s_39100b140e1be6::t_104f3f18023a34 28-32
+drizzle/0002_greedy_nomad.sql
+  s_39100b140e1be6::t_c76d25d86b41bb 1
+lib/db/schema.ts
+  s_39100b140e1be6::t_3e5198a2078271 48
+lib/pool.ts
+  s_39100b140e1be6::t_43123c66b5e472 67,76-82,88-90
+drizzle/meta/0002_snapshot.json
+  s_39100b140e1be6::t_b22fae14ac89c4 1-550
+lib/refresh.ts
+  s_39100b140e1be6::t_04e638b2576138 53,69
+app/api/pools/[code]/unlock/route.ts
+  s_39100b140e1be6::t_f63fe278dd4838 1-26
+drizzle/meta/_journal.json
+  s_39100b140e1be6::t_b22fae14ac89c4 18-24
+app/components/AdminPanel.tsx
+  s_39100b140e1be6::t_4bb435e80d65db 65-74
+  s_39100b140e1be6::t_9486fa88098c68 108-117,122-153
+  s_39100b140e1be6::t_d35e80523d5342 7,15,22
+tests/lock.test.ts
+  s_39100b140e1be6::t_8e7ec2e42d8942 1-71
+vitest.config.ts
+  s_39100b140e1be6::t_aca63342c7eaac 7-8
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "2237fc8f61aba1b808e47fa44ba33d7e4af30b9c",
+  "prompts": {},
+  "sessions": {
+    "s_39100b140e1be6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8f5ed5d2-499f-450e-b549-239cecbdab4b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Mike McClannahan <mam8cc@users.noreply.github.com>"
+    }
+  }
+}
