@@ -4,15 +4,11 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { withFlag } from "@/lib/flags";
 
-type OrderEntry = { id: number; name: string };
 type HistoryRound = { date: string; picks: { name: string; team: string; outcome: string }[] };
 
 export default function SurvivorBoard({
   code,
   date,
-  order,
-  pickerId,
-  meId,
   available,
   myPickThisRound,
   pastDeadline,
@@ -20,9 +16,6 @@ export default function SurvivorBoard({
 }: {
   code: string;
   date: string | null;
-  order: OrderEntry[];
-  pickerId: number | null;
-  meId: number;
   available: string[];
   myPickThisRound: string | null;
   pastDeadline: boolean;
@@ -32,21 +25,18 @@ export default function SurvivorBoard({
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  async function pick(team?: string) {
+  async function pick(team: string) {
     setError(null);
     setBusy(true);
     const res = await fetch(`/api/pools/${code}/survivor-pick`, {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify(team ? { date, team } : { date, auto: true }),
+      body: JSON.stringify({ date, team }),
     });
     setBusy(false);
     if (!res.ok) return setError((await res.json().catch(() => ({})))?.error ?? "Could not pick.");
     router.refresh();
   }
-
-  const myTurn = pickerId === meId && !myPickThisRound;
-  const pickerName = order.find((o) => o.id === pickerId)?.name ?? null;
 
   return (
     <div>
@@ -55,22 +45,13 @@ export default function SurvivorBoard({
           <div className="turn-banner">
             <strong>This round: {date}</strong>
             <div className="small muted" style={{ marginTop: 4 }}>
-              Snake order:{" "}
-              {order.map((o, i) => (
-                <span key={o.id}>
-                  {i > 0 && " → "}
-                  <span style={{ fontWeight: o.id === pickerId ? 700 : 400, color: o.id === pickerId ? "var(--accent)" : undefined }}>
-                    {o.name}
-                    {o.id === meId ? " (you)" : ""}
-                  </span>
-                </span>
-              ))}
+              Pick any team playing in this opening group-stage round.
             </div>
           </div>
 
-          {myTurn ? (
+          {!myPickThisRound && !pastDeadline ? (
             <>
-              <p className="small">Your turn — back a team that plays today to survive the round:</p>
+              <p className="small">Back a team to survive the round:</p>
               {available.length === 0 ? (
                 <p className="muted">No available teams play this round.</p>
               ) : (
@@ -85,20 +66,10 @@ export default function SurvivorBoard({
             </>
           ) : myPickThisRound ? (
             <p className="notice">You backed <strong>{withFlag(myPickThisRound)}</strong> this round.</p>
-          ) : pickerName ? (
-            <p className="muted">
-              Waiting for <strong>{pickerName}</strong> to pick…
-              {pastDeadline && (
-                <>
-                  {" "}
-                  <button className="secondary" disabled={busy} onClick={() => pick()}>
-                    Auto-pick (deadline passed)
-                  </button>
-                </>
-              )}
-            </p>
+          ) : pastDeadline ? (
+            <p className="muted">This round's deadline has passed.</p>
           ) : (
-            <p className="muted">Everyone has picked this round.</p>
+            <p className="muted">No pick is open right now.</p>
           )}
           {error && <div className="error">{error}</div>}
         </>

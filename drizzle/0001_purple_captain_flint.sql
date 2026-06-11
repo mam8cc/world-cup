@@ -1,0 +1,1 @@
+ALTER TABLE "survivor_picks" DROP CONSTRAINT "survivor_picks_pool_id_team_unique";

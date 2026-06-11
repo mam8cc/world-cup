@@ -16,8 +16,8 @@ const FORMATS = [
   },
   {
     id: "survivor",
-    title: "Survivor Draft",
-    desc: "Each day, back a still-alive team — drafted in snake order, each team used once. Win to survive; last one standing wins.",
+    title: "Survivor",
+    desc: "Across the opening group-stage fixtures, back any team playing that day. Win to survive; last one standing wins.",
   },
 ] as const;
 

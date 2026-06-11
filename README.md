@@ -16,8 +16,8 @@ live, so once a pool is set up nobody has to touch it.
   first match, then scores itself.
 - **Sweepstake** — teams are randomly drawn to players (balanced snake distribution); they
   earn points as they win and advance.
-- **Survivor Draft** — each day, back a still-alive team in snake-draft order; each team is
-  used once across the pool; win to survive, last one standing wins.
+- **Survivor** — across the opening group-stage fixtures, back any team playing that day;
+  win to survive, last one standing wins.
 
 ## Stack
 
