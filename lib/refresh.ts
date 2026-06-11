@@ -50,6 +50,7 @@ export async function refreshResults(season = SEASON): Promise<{ matches: number
           ft2: m.ft?.[1] ?? null,
           winner: m.winner,
           status: m.status,
+          kickoff: m.kickoff,
           updatedAt: new Date(),
         })
         .onConflictDoUpdate({
@@ -65,6 +66,7 @@ export async function refreshResults(season = SEASON): Promise<{ matches: number
             ft2: sql`excluded.ft2`,
             winner: sql`excluded.winner`,
             status: sql`excluded.status`,
+            kickoff: sql`excluded.kickoff`,
             updatedAt: new Date(),
           },
         });

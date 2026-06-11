@@ -6,7 +6,7 @@ import { getAdminToken } from "@/lib/auth";
 import { db } from "@/lib/db";
 import { assignments } from "@/lib/db/schema";
 import { withFlag } from "@/lib/flags";
-import { getMatches, getPoolByCode } from "@/lib/pool";
+import { getMatches, getPlayers, getPoolByCode } from "@/lib/pool";
 
 export default async function AdminPage({ params }: { params: Promise<{ code: string }> }) {
   const { code } = await params;
@@ -25,6 +25,11 @@ export default async function AdminPage({ params }: { params: Promise<{ code: st
     ft1: m.ft?.[0] ?? null,
     ft2: m.ft?.[1] ?? null,
   }));
+  const playerRows = (await getPlayers(pool.id)).map((p) => ({
+    id: p.id,
+    name: p.displayName,
+    isAdmin: p.isAdmin,
+  }));
 
   return (
     <>
@@ -38,6 +43,7 @@ export default async function AdminPage({ params }: { params: Promise<{ code: st
         status={pool.status}
         drawDone={drawDone}
         matches={matchOpts}
+        players={playerRows}
       />
       <div className="panel">
         <h2 style={{ marginTop: 0 }}>Export</h2>

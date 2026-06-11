@@ -1,0 +1,1 @@
+ALTER TABLE "matches" ADD COLUMN "kickoff" timestamp with time zone;

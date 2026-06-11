@@ -15,6 +15,13 @@
       "when": 1781113214588,
       "tag": "0001_purple_captain_flint",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1781138542568,
+      "tag": "0002_greedy_nomad",
+      "breakpoints": true
     }
   ]
 }

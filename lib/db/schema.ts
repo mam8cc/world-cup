@@ -45,6 +45,7 @@ export const matches = pgTable("matches", {
   ft2: integer("ft2"),
   winner: text("winner"),
   status: text("status").$type<"scheduled" | "final">().notNull(),
+  kickoff: timestamp("kickoff", { withTimezone: true }),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(),
 });
 

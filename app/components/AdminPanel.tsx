@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 type MatchOpt = { feedKey: string; label: string; ft1: number | null; ft2: number | null };
+type PlayerRow = { id: number; name: string; isAdmin: boolean };
 
 export default function AdminPanel({
   code,
@@ -11,12 +12,14 @@ export default function AdminPanel({
   status,
   drawDone,
   matches,
+  players,
 }: {
   code: string;
   format: string;
   status: string;
   drawDone: boolean;
   matches: MatchOpt[];
+  players: PlayerRow[];
 }) {
   const router = useRouter();
   const [busy, setBusy] = useState<string | null>(null);
@@ -59,7 +62,16 @@ export default function AdminPanel({
         <div className="panel">
           <h2 style={{ marginTop: 0 }}>Draw</h2>
           {drawDone ? (
-            <p className="notice">The draw is complete — teams are assigned.</p>
+            <>
+              <p className="notice">The draw is complete — teams are assigned.</p>
+              <button
+                className="danger"
+                disabled={busy !== null}
+                onClick={() => call("unlock", `/api/pools/${code}/unlock`)}
+              >
+                {busy === "unlock" ? "Clearing…" : "Unlock & clear draw"}
+              </button>
+            </>
           ) : (
             <>
               <p className="muted small">
@@ -93,10 +105,52 @@ export default function AdminPanel({
               </button>
             </>
           ) : (
-            <p className="notice">Pool is locked.</p>
+            <>
+              <p className="notice">Picks are locked.</p>
+              <button
+                className="secondary"
+                disabled={busy !== null}
+                onClick={() => call("unlock", `/api/pools/${code}/unlock`)}
+              >
+                {busy === "unlock" ? "Unlocking…" : "Unlock (reopen picks)"}
+              </button>
+            </>
           )}
         </div>
       )}
+
+      <div className="panel">
+        <h2 style={{ marginTop: 0 }}>Players ({players.length})</h2>
+        {players.length === 0 ? (
+          <p className="muted small">No one has joined yet.</p>
+        ) : (
+          <table>
+            <tbody>
+              {players.map((p) => (
+                <tr key={p.id}>
+                  <td>
+                    {p.name}
+                    {p.isAdmin && <span className="pill" style={{ marginLeft: 8 }}>admin</span>}
+                  </td>
+                  <td style={{ textAlign: "right" }}>
+                    <button
+                      className="danger"
+                      disabled={busy !== null}
+                      onClick={() => call(`remove-${p.id}`, `/api/pools/${code}/remove-player`, { playerId: p.id })}
+                    >
+                      {busy === `remove-${p.id}` ? "Removing…" : "Remove"}
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+        <p className="muted small" style={{ marginTop: 8 }}>
+          Removing a player also deletes their picks. For a sweepstake, unlock to clear the draw before
+          changing the roster, then re-draw.
+        </p>
+      </div>
 
       <div className="panel">
         <h2 style={{ marginTop: 0 }}>Manual result override</h2>

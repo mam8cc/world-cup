@@ -38,7 +38,21 @@ export type Match = {
   status: "scheduled" | "final";
   // Winner team name, or null for an unplayed match or a group-stage draw.
   winner: string | null;
+  // Kickoff as a precise UTC instant (from the feed's date + time), or null if unknown.
+  kickoff: Date | null;
 };
+
+// Parse a feed time like "13:00 UTC-6" with its date into a UTC instant.
+export function parseKickoff(date: string, time?: string): Date | null {
+  if (!time) return null;
+  const m = time.match(/^(\d{1,2}):(\d{2})\s*UTC([+-])(\d{1,2})(?::?(\d{2}))?$/i);
+  if (!m) return null;
+  const [, hh, mm, sign, oh, om] = m;
+  const pad = (s: string) => s.padStart(2, "0");
+  const iso = `${date}T${pad(hh)}:${mm}:00${sign}${pad(oh)}:${pad(om ?? "00")}`;
+  const d = new Date(iso);
+  return Number.isNaN(d.getTime()) ? null : d;
+}
 
 export function normalizeStage(round: string): Stage {
   const r = round.trim().toLowerCase();
@@ -95,6 +109,7 @@ export function parseFeed(feed: RawFeed): Match[] {
       pens: m.score?.p ?? null,
       status: played ? "final" : "scheduled",
       winner,
+      kickoff: parseKickoff(m.date, m.time),
     };
   });
 }

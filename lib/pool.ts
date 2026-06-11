@@ -64,6 +64,7 @@ export function rowToMatch(r: MatchRow): Match {
     pens: null,
     status: r.status,
     winner: r.winner,
+    kickoff: r.kickoff ?? null,
   };
 }
 
@@ -72,19 +73,21 @@ export async function getMatches(): Promise<Match[]> {
   return rows.map(rowToMatch);
 }
 
-// Predict & lock picks close at the first kickoff (or when an admin locks).
-export function firstKickoff(matches: Match[]): string | null {
-  const dates = matches.map((m) => m.date).sort();
-  return dates[0] ?? null;
+// The earliest actual kickoff in the tournament, as a precise UTC instant.
+export function firstKickoff(matches: Match[]): Date | null {
+  let min: number | null = null;
+  for (const m of matches) {
+    if (m.kickoff && (min === null || m.kickoff.getTime() < min)) min = m.kickoff.getTime();
+  }
+  return min === null ? null : new Date(min);
 }
 
 export function predictionsOpen(pool: Pool, matches: Match[]): boolean {
   if (pool.status !== "setup") return false;
   const first = firstKickoff(matches);
-  if (!first) return true;
-  // Compare by date (kickoff times vary); picks lock at the start of opening day.
-  const today = new Date().toISOString().slice(0, 10);
-  return today < first;
+  if (!first) return true; // schedule not loaded yet — keep picks open
+  // Picks lock at the exact first kickoff (timezone-safe).
+  return new Date() < first;
 }
 
 // Whether one player may view another's picks. Predict & lock stays hidden until picks
