@@ -1,0 +1,45 @@
+app/api/pools/[code]/export/route.ts
+  s_39100b140e1be6::t_065543a2607876 26
+  s_39100b140e1be6::t_c0233506195d29 5
+app/admin/page.tsx
+  s_39100b140e1be6::t_2a62dbbc88fb97 51,65-69
+app/api/pools/[code]/lock/route.ts
+  s_39100b140e1be6::t_591d775abcf824 12
+  s_39100b140e1be6::t_dc256cff1e6593 5
+app/api/pools/[code]/override/route.ts
+  s_39100b140e1be6::t_4f83fcbb14a161 5
+  s_39100b140e1be6::t_51900caa124687 13
+app/pool/[code]/admin/page.tsx
+  s_39100b140e1be6::t_98b4f0a5941b39 5
+  s_39100b140e1be6::t_4bf5db6e50b808 15
+app/api/pools/[code]/remove-player/route.ts
+  s_39100b140e1be6::t_10603c7a0e7bf9 13
+  s_39100b140e1be6::t_82ab65cdf978c1 5
+app/api/pools/[code]/refresh/route.ts
+  s_39100b140e1be6::t_64db6dda4e4bd3 11
+  s_39100b140e1be6::t_63a292749e1359 2
+app/api/pools/[code]/unlock/route.ts
+  s_39100b140e1be6::t_b596465ce38c9f 5
+  s_39100b140e1be6::t_32916276c66d16 14
+app/api/pools/[code]/draw/route.ts
+  s_39100b140e1be6::t_d8bbd80beeef2c 24
+  s_39100b140e1be6::t_de03533ca374af 5
+lib/auth.ts
+  s_39100b140e1be6::t_707b28dbbccd46 68-74
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "55a8f1cd204e87513fb8d36002d9db2773fcad1c",
+  "prompts": {},
+  "sessions": {
+    "s_39100b140e1be6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8f5ed5d2-499f-450e-b549-239cecbdab4b",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Mike McClannahan <mam8cc@users.noreply.github.com>"
+    }
+  }
+}
